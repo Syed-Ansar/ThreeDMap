@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
 import { useDebounce } from "../hooks/useDebounce";
@@ -29,7 +29,7 @@ const Map = ({ setCapturedImage, isCapturing, setIsCapturing }) => {
   const [dark, setDark] = useState(false);
 
   //The captureMap function is defined to capture the map as an image.
-  function captureMap() {
+  const captureMap = useCallback(() => {
     if (!isCapturing) {
       setIsCapturing(true);
       const map = mapContainerRef.current.getMap();
@@ -45,17 +45,17 @@ const Map = ({ setCapturedImage, isCapturing, setIsCapturing }) => {
         map.triggerRepaint();
       }
     }
-  }
+  },[isCapturing, setCapturedImage, setIsCapturing])
 
-  function handleMapChange() {
-    if (mapStyle === "mapbox://styles/mapbox/navigation-night-v1") {
-      setMapStyle("mapbox://styles/mapbox/outdoors-v12");
+  const handleMapChange = useCallback(() => {
+    if (mapStyle === "mapbox://styles/mapbox/outdoors-v12") {
+      setMapStyle("mapbox://styles/mapbox/navigation-night-v1");
       setDark(true);
     } else {
-      setMapStyle("mapbox://styles/mapbox/navigation-night-v1");
+      setMapStyle("mapbox://styles/mapbox/outdoors-v12");
       setDark(false);
     }
-  }
+  },[mapStyle,setDark])
 
   async function handleSearch(debouncedSearch) {
     if(searchInputValue.length){
@@ -82,16 +82,19 @@ const Map = ({ setCapturedImage, isCapturing, setIsCapturing }) => {
     handleSearch(debouncedSearch);
   },[debouncedSearch])
 
-  function success(position) {
-    let coord = position.coords;
-    setMapCoordinates({
-      longitude: coord.longitude,
-      latitude: coord.latitude,
-      zoom: 4,
-    });
-  }
+  const success = useCallback(
+    (position) => {
+      let coord = position.coords;
+      setMapCoordinates({
+        longitude: coord.longitude,
+        latitude: coord.latitude,
+        zoom: 4,
+      });
+    },
+    []
+  );
 
-  function error(err) {
+  const error = (err) => {
     console.log(`ERROR(${err.code}): ${err.message}`);
     setMapCoordinates({
       longitude: YOUR_INITIAL_LONGITUDE,
@@ -104,7 +107,7 @@ const Map = ({ setCapturedImage, isCapturing, setIsCapturing }) => {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(success, error);
     }
-  }, []);
+  }, [success]);
 
 
 

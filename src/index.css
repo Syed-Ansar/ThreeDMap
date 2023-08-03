@@ -47,6 +47,7 @@ button {
   padding: 10px 10px;
   border-radius: 4px;
   font-family: system-ui;
+  min-width: 114px;
 }
 
 button:hover {
@@ -78,6 +79,8 @@ input {
 input::placeholder{
   color: white;
   opacity: 0.8;
+  font-family: system-ui;
+  font-size: 14px;
 }
 
 .btn {
