@@ -1,0 +1,109 @@
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #020e24;
+}
+
+.map-container {
+  height: 400px;
+  border: 2px solid white
+}
+
+
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* margin: 12px; */
+  border-radius: 4px;
+} 
+
+.Map {
+  border: 2px solid white;
+  /* margin: 10px 0px; */
+}
+
+.container {
+  display: "flex";
+  justify-content: "space-around";
+}
+
+button {
+  background-color: transparent;
+  outline: none;
+  border: 1px solid white;
+  width: max-content;
+  color: white;
+  padding: 10px 10px;
+  border-radius: 4px;
+  font-family: system-ui;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.82;
+}
+
+.map-controls {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+input {
+  border-radius: 4px;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 8px;
+  font-size: 16px;
+  color: #fff;
+  width: 200px;
+  outline: none;
+  margin-right: 15px;
+  height: 100%;
+}
+input::placeholder{
+  color: white;
+  opacity: 0.8;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.suggestion {
+  position: absolute;
+    background: #020e24;
+    width: 200px;
+    list-style: none;
+    margin-top: 10px;
+    z-index: 1;
+    height: 150px;
+    padding: 10px;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid white;
+}
+.suggestion > li {
+  padding: 5px;
+}
+.threeDBox{
+  width: 500;
+      height: 500;
+      border: 2px solid white;
+      margin: 30px;
+      margin-top: 100px;
+}
