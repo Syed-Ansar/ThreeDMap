@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
 import { useDebounce } from "../hooks/useDebounce";
@@ -12,7 +12,7 @@ const YOUR_INITIAL_ZOOM = 4;
 const Map = ({ setCapturedImage, isCapturing, setIsCapturing }) => {
   const mapContainerRef = useRef(null);
   const [searchInputValue, setSearchInputValue] = useState("");
-  const debouncedSearch = useDebounce(searchInputValue, 2000);
+  const debouncedSearch = useDebounce(searchInputValue, 1500);
 
   const [mapCoordinates, setMapCoordinates] = useState({
     lng: YOUR_INITIAL_LONGITUDE,
@@ -100,7 +100,7 @@ const Map = ({ setCapturedImage, isCapturing, setIsCapturing }) => {
     });
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(success, error);
     }
@@ -119,7 +119,7 @@ const Map = ({ setCapturedImage, isCapturing, setIsCapturing }) => {
           <div>
             <input
               type="text"
-              placeholder="Enter Location"
+              placeholder="Search location..."
               value={searchInputValue}
               onChange={(e) => setSearchInputValue(e.target.value)}
             />
