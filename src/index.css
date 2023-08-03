@@ -73,6 +73,7 @@ input {
   outline: none;
   margin-right: 15px;
   height: 100%;
+  width: 250px;
 }
 input::placeholder{
   color: white;
