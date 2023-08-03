@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 .App {
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +22,7 @@
 .AppContainer > H1 {
   margin-top: 30px;
   font-family: math;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 600px) {
